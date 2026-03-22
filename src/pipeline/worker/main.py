@@ -46,7 +46,13 @@ def process_message(message: dict, settings) -> None:
 
         try:
             try:
-                dispatch(org_file.file_type, tmp_path, settings.database_url)
+                dispatch(
+                    org_file.file_type,
+                    tmp_path,
+                    settings.database_url,
+                    org_file=org_file,
+                    api_database_url=settings.api_database_url,
+                )
             except (ValidationFailed, NotImplementedFileType, ValueError) as exc:
                 mark_failed(conn, file_id, str(exc))
                 return

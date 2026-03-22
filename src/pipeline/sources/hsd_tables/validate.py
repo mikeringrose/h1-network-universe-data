@@ -44,7 +44,7 @@ def _valid_ssa_codes(engine, contract_year: int) -> set[str]:
     with engine.connect() as conn:
         r = conn.execute(
             text("SELECT DISTINCT ssa_county_code FROM county WHERE contract_year = :y"),
-            {"y": contract_year},
+            {"y": contract_year - 1},
         )
         return {str(row[0]).strip().zfill(5) for row in r if row[0] is not None}
 

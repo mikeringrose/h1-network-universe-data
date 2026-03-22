@@ -43,6 +43,32 @@ FACILITY_COLUMNS = [
     "accuracy_confidence",
 ]
 
+ORG_FACILITY_COLUMNS = [
+    "ssa_state_county_code",
+    "facility_service_type",
+    "facility_specialty_code",
+    "npi",
+    "staffed_beds",
+    "facility_name",
+    "street_address",
+    "city",
+    "state_code",
+    "zip_code",
+]
+
+ORG_PROVIDER_COLUMNS = [
+    "ssa_state_county_code",
+    "provider_name",
+    "npi",
+    "provider_specialty_code",
+    "contract_type",
+    "street_address",
+    "city",
+    "state_code",
+    "zip_code",
+    "medical_group_affiliation",
+]
+
 def _normalize_header(name: str) -> str:
     """Strip, lowercase, replace spaces/slashes with underscores, remove other non-alphanumeric."""
     if not name or (isinstance(name, float) and str(name) == "nan"):
@@ -61,13 +87,49 @@ _HEADER_ALIASES: dict[str, str] = {
     "letter_of_intent_yn": "letter_of_intent",
     "national_provider_identifier": "npi",
     "national_provider_identifier_npi": "npi",
+    "national_provider_identifier_npi_number": "npi",
+    "facility_or_service_type": "facility_service_type",
+    "_of_staffed_medicare_certified_beds": "staffed_beds",
+}
+
+# Additional aliases applied only when reading org_facility files.
+# Handles both "Facility *" headers (actual CMS files) and "Provider *" headers (per spec).
+_ORG_FACILITY_ALIASES: dict[str, str] = {
+    # "Specialty" in actual CMS files = facility service type
+    "specialty": "facility_service_type",
+    # "Specialty Code" in actual CMS files = facility specialty code
+    "specialty_code": "facility_specialty_code",
+    # address fields — "Facility *" (actual CMS files) and "Provider *" (per spec)
+    "facility_street_address": "street_address",
+    "facility_city": "city",
+    "facility_state": "state_code",
+    "facility_zip_code": "zip_code",
+    "provider_street_address": "street_address",
+    "provider_city": "city",
+    "provider_state_code": "state_code",
+    "provider_zip_code": "zip_code",
+}
+
+# Additional aliases applied only when reading org_provider files.
+_ORG_PROVIDER_ALIASES: dict[str, str] = {
+    # "Name of Physician..." variants → provider_name
+    "name_of_physician_or_mid_level_practitioner": "provider_name",
+    "name_of_physician_or_midlevel_practitioner":  "provider_name",
+    # "Specialty Code" (actual files) → provider_specialty_code
+    "specialty_code": "provider_specialty_code",
+    # address fields
+    "provider_street_address": "street_address",
+    "provider_city":           "city",
+    "provider_state":          "state_code",
+    "provider_state_code":     "state_code",
+    "provider_zip_code":       "zip_code",
 }
 
 
 def read(path: str | Path, table_type: str) -> pl.DataFrame:
-    """Read Provider or Facility HSD file (CSV or XLSX). Path relative to DATA_DIR if not absolute.
+    """Read Provider, Facility, OrgFacility, or OrgProvider HSD file (CSV or XLSX). Path relative to DATA_DIR if not absolute.
     Returns DataFrame with canonical column names; only columns that exist in the file are present.
-    table_type must be 'provider' or 'facility'."""
+    table_type must be 'provider', 'facility', 'org_facility', or 'org_provider'."""
     settings = get_settings()
     resolved = Path(path) if Path(path).is_absolute() else Path(settings.data_dir) / path
     if not resolved.exists():
@@ -84,11 +146,22 @@ def read(path: str | Path, table_type: str) -> pl.DataFrame:
     if df.is_empty():
         return df
 
-    expected = PROVIDER_COLUMNS if table_type == "provider" else FACILITY_COLUMNS
+    if table_type == "provider":
+        expected = PROVIDER_COLUMNS
+        aliases = _HEADER_ALIASES
+    elif table_type == "org_facility":
+        expected = ORG_FACILITY_COLUMNS
+        aliases = _HEADER_ALIASES | _ORG_FACILITY_ALIASES
+    elif table_type == "org_provider":
+        expected = ORG_PROVIDER_COLUMNS
+        aliases = _HEADER_ALIASES | _ORG_PROVIDER_ALIASES
+    else:
+        expected = FACILITY_COLUMNS
+        aliases = _HEADER_ALIASES
     rename = {}
     for col in df.columns:
         norm = _normalize_header(col)
-        canonical = _HEADER_ALIASES.get(norm, norm)
+        canonical = aliases.get(norm, norm)
         if canonical in expected:
             rename[col] = canonical
     out = df.rename(rename)

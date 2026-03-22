@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.5
+    container_name: h1-pipeline-postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: pipeline
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d pipeline"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  localstack:
+    image: localstack/localstack:3
+    container_name: h1-pipeline-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      SERVICES: sqs,s3
+    volumes:
+      - localstack_data:/var/lib/localstack
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:4566/_localstack/health || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  localstack-setup:
+    image: amazon/aws-cli
+    container_name: h1-pipeline-localstack-setup
+    depends_on:
+      localstack:
+        condition: service_healthy
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+    entrypoint: >
+      /bin/sh -c "
+        aws --endpoint-url=http://localstack:4566 sqs create-queue --queue-name org-files &&
+        aws --endpoint-url=http://localstack:4566 s3 mb s3://org-file-uploads
+      "
+    restart: "no"
+
+volumes:
+  postgres_data:
+  localstack_data:

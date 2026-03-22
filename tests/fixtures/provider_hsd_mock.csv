@@ -1,0 +1,16 @@
+SSA State/County Code,Name of Physician or Mid-Level Practitioner,NPI,Specialty,Specialty Code,Contract Type,Provider Street Address,Provider City,Provider State,Provider ZIP Code,Accepts New Patients (Y/N),Medical Group Affiliation,Uses CMS MA Contract Amendment (Y/N),Letter of Intent (Y/N),Accuracy Confidence
+01001,Jane Doe MD,1234567890,Internal Medicine,001,HMO,100 Main St,Prattville,AL,36066,Y,Autauga Medical Group,,, high
+01001,Robert Smith MD,2345678901,Cardiology,003,PPO,200 Oak Ave,Prattville,AL,36066,Y,Autauga Medical Group,N,,high
+01001,Maria Garcia MD,3456789012,General Surgery,002,HMO,300 Pine Rd,Prattville,AL,36067,N,,,,
+01001,Kevin Lee MD,4567890123,Orthopedic Surgery,004,PPO,400 Elm St,Prattville,AL,36066,Y,Prattville Ortho Associates,,, medium
+01001,Susan Chen MD,5678901234,Obstetrics/Gynecology,006,HMO,500 Maple Dr,Prattville,AL,36067,Y,Women's Health of Autauga,,,,
+01003,James Williams MD,6789012345,Family Medicine,029,PPO,800 Gulf Shores Pkwy,Gulf Shores,AL,36542,Y,Baldwin Health Partners,N,,high
+01003,Patricia Brown MD,7890123456,Psychiatry,011,HMO,900 Fairhope Ave,Fairhope,AL,36532,N,,,,,
+01003,Michael Jones MD,8901234567,Gastroenterology,018,PPO,1000 Bay Minette Hwy,Bay Minette,AL,36507,Y,Gulf Coast GI Associates,,,,
+01003,Linda Taylor MD,9012345678,Nephrology,016,HMO,1100 Foley Beach Expy,Foley,AL,36535,Y,Baldwin Health Partners,,,, medium
+01003,David Martinez MD,1234509876,Hematology/Oncology,019,PPO,1200 Daphne Ave,Daphne,AL,36526,Y,Eastern Shore Oncology,,,,
+01010,Angela White MD,2345610987,Neurology,005,HMO,100 University Blvd,Birmingham,AL,35201,Y,UAB Neurology Group,N,,high
+01010,Christopher Harris MD,3456721098,Endocrinology,021,PPO,200 19th St S,Birmingham,AL,35205,N,,,,,
+01010,Amanda Clark MD,4567832109,Pulmonology,017,HMO,300 Montclair Rd,Birmingham,AL,35213,Y,Birmingham Pulmonary Assoc,,,,
+01010,Joseph Lewis MD,5678943210,Rheumatology,020,PPO,400 Lakeshore Pkwy,Birmingham,AL,35209,Y,Cahaba Medical Group,,,, low
+01010,Sandra Robinson MD,6789054321,Dermatology,009,HMO,500 Green Springs Hwy,Birmingham,AL,35209,Y,Birmingham Derm Partners,N,,high

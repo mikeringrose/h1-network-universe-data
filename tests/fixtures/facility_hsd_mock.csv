@@ -1,0 +1,16 @@
+SSA State/County Code,Facility Name,NPI,Specialty,Specialty Code,Facility Street Address,Facility City,Facility State,Facility ZIP Code,Number of Beds,Letter of Intent,Accuracy Confidence
+01001,Autauga Regional Medical Center,1122334455,Acute Inpatient Hospitals,040,500 Hospital Dr,Prattville,AL,36066,312,,high
+01001,Prattville Ambulatory Surgery Center,2233445566,Ambulatory Surgery Centers,041,200 Surgery Ln,Prattville,AL,36067,,,medium
+01001,Riverside Skilled Nursing Facility,3344556677,Skilled Nursing Facilities,053,900 Care Blvd,Prattville,AL,36066,120,,high
+01003,Baldwin County Home Health,4455667788,Home Health Agencies,047,800 Health Way,Bay Minette,AL,36507,,,,
+01003,Gulf Coast ESRD Center,5566778899,End Stage Renal Disease Facilities,046,150 Dialysis Rd,Foley,AL,36535,,,,
+01003,Baldwin Hospice House,6677889900,Hospice,048,222 Comfort Ct,Fairhope,AL,36532,,,,
+01010,Jefferson Community Mental Health,7788990011,Community Mental Health Centers,044,400 Wellness Ave,Birmingham,AL,35201,,,,
+01010,Alabama FQHC Health Center,8899001122,Rural Health Clinics / Federally Qualified Health Centers,052,600 Primary Care St,Birmingham,AL,35203,,,,
+01010,UAB Cardiac Rehabilitation,9900112233,Cardiac Rehabilitation,042,1720 2nd Ave S,Birmingham,AL,35294,,,,
+01010,Birmingham CORF,1010203040,Comprehensive Outpatient Rehabilitation Facilities,045,301 Rehab Blvd,Birmingham,AL,35205,,,,
+01003,Eastern Shore Chemical Dependency,2020304050,Chemical Dependency / Substance Abuse,043,75 Recovery Rd,Daphne,AL,36526,,,,
+01003,Bay Minette IDTF,3030405060,Independent Diagnostic Testing Facilities,050,1 Imaging Plz,Bay Minette,AL,36507,,,,
+01001,Prattville Outpatient Therapy,4040506070,Outpatient Physical/Occupational/Speech Therapy,051,88 Therapy Dr,Prattville,AL,36066,,,,
+01010,Children's Behavioral Health,5050607080,Community Mental Health Centers,044,200 Kids Way,Birmingham,AL,35233,,,,
+01010,Birmingham General Hospital,6060708090,Acute Inpatient Hospitals,040,810 S 20th St,Birmingham,AL,35205,554,,high

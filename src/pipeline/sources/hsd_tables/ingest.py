@@ -46,14 +46,15 @@ ORG_FACILITY_COLUMNS = [
     "ssa_state_county_code",      # pos 0
     "facility_name",               # pos 1
     "npi",                         # pos 2
-    "facility_service_type",       # pos 3 (specialty)
-    "facility_specialty_code",     # pos 4 (specialty_code)
-    "street_address",              # pos 5 (facility_street_address)
-    "city",                        # pos 6 (facility_city)
-    "state_code",                  # pos 7 (facility_state)
-    "zip_code",                    # pos 8 (facility_zip_code)
-    "staffed_beds",                # pos 9 (number_of_beds)
-    # pos 10 (letter_of_intent) and pos 11 (accuracy_confidence) not captured
+    "specialty",                   # pos 3
+    "facility_specialty_code",     # pos 4
+    "street_address",              # pos 5
+    "city",                        # pos 6
+    "state_code",                  # pos 7
+    "zip_code",                    # pos 8
+    "number_of_beds",              # pos 9
+    "letter_of_intent",            # pos 10
+    "accuracy_confidence",         # pos 11
 ]
 
 ORG_PROVIDER_COLUMNS = [

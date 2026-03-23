@@ -5,15 +5,17 @@ import psycopg2.extras
 _INSERT_SQL = """
     INSERT INTO org_facilities (
         id, organization_id, source_file_id,
-        ssa_state_county_code, facility_service_type, facility_specialty_code,
-        npi, staffed_beds, facility_name,
+        ssa_state_county_code, specialty, facility_specialty_code,
+        npi, number_of_beds, facility_name,
         street_address, city, state_code, zip_code,
+        letter_of_intent, accuracy_confidence,
         latitude, longitude, updated_at
     ) VALUES (
         %(id)s, %(organization_id)s, %(source_file_id)s,
-        %(ssa_state_county_code)s, %(facility_service_type)s, %(facility_specialty_code)s,
-        %(npi)s, %(staffed_beds)s, %(facility_name)s,
+        %(ssa_state_county_code)s, %(specialty)s, %(facility_specialty_code)s,
+        %(npi)s, %(number_of_beds)s, %(facility_name)s,
         %(street_address)s, %(city)s, %(state_code)s, %(zip_code)s,
+        %(letter_of_intent)s, %(accuracy_confidence)s,
         %(latitude)s, %(longitude)s, NOW()
     )
 """

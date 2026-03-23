@@ -57,33 +57,21 @@ ORG_FACILITY_COLUMNS = [
 ]
 
 ORG_PROVIDER_COLUMNS = [
-    "ssa_state_county_code",
-    "provider_name",
-    "npi",
-    "provider_specialty_code",
-    "contract_type",
-    "street_address",
-    "city",
-    "state_code",
-    "zip_code",
-    "medical_group_affiliation",
-]
-
-# Positional assignment list for org_provider. Placeholder names (prefixed _) mark
-# positions that exist in the file but are not captured in org_providers.
-_ORG_PROVIDER_POSITIONAL = [
-    "ssa_state_county_code",          # pos 0
-    "provider_name",                   # pos 1
-    "npi",                             # pos 2
-    "_specialty",                      # pos 3 (not captured)
-    "provider_specialty_code",         # pos 4
-    "contract_type",                   # pos 5
-    "street_address",                  # pos 6
-    "city",                            # pos 7
-    "state_code",                      # pos 8
-    "zip_code",                        # pos 9
-    "_accepts_new_patients",           # pos 10 (not captured)
-    "medical_group_affiliation",       # pos 11
+    "ssa_state_county_code",            # pos 0
+    "provider_name",                     # pos 1
+    "npi",                               # pos 2
+    "specialty",                         # pos 3
+    "provider_specialty_code",           # pos 4
+    "contract_type",                     # pos 5
+    "street_address",                    # pos 6
+    "city",                              # pos 7
+    "state_code",                        # pos 8
+    "zip_code",                          # pos 9
+    "accepts_new_patients",              # pos 10
+    "medical_group_affiliation",         # pos 11
+    "uses_cms_ma_contract_amendment",    # pos 12
+    "letter_of_intent",                  # pos 13
+    "accuracy_confidence",               # pos 14
 ]
 
 
@@ -117,7 +105,7 @@ def read(path: str | Path, table_type: str) -> pl.DataFrame:
     elif table_type == "provider":
         col_list, select_cols = PROVIDER_COLUMNS, PROVIDER_COLUMNS
     else:  # org_provider
-        col_list, select_cols = _ORG_PROVIDER_POSITIONAL, ORG_PROVIDER_COLUMNS
+        col_list, select_cols = ORG_PROVIDER_COLUMNS, ORG_PROVIDER_COLUMNS
 
     n = min(len(df.columns), len(col_list))
     df = df.rename({old: new for old, new in zip(df.columns[:n], col_list[:n])})

@@ -8,15 +8,21 @@ _INSERT_SQL = """
         ssa_state_county_code, provider_name, npi,
         provider_specialty_code, contract_type,
         street_address, city, state_code, zip_code,
-        medical_group_affiliation,
-        latitude, longitude, updated_at
+        latitude, longitude,
+        medical_group_affiliation, specialty,
+        accepts_new_patients, uses_cms_ma_contract_amendment,
+        letter_of_intent, accuracy_confidence,
+        updated_at
     ) VALUES (
         %(id)s, %(organization_id)s, %(source_file_id)s,
         %(ssa_state_county_code)s, %(provider_name)s, %(npi)s,
         %(provider_specialty_code)s, %(contract_type)s,
         %(street_address)s, %(city)s, %(state_code)s, %(zip_code)s,
-        %(medical_group_affiliation)s,
-        %(latitude)s, %(longitude)s, NOW()
+        %(latitude)s, %(longitude)s,
+        %(medical_group_affiliation)s, %(specialty)s,
+        %(accepts_new_patients)s, %(uses_cms_ma_contract_amendment)s,
+        %(letter_of_intent)s, %(accuracy_confidence)s,
+        NOW()
     )
 """
 
